@@ -36,7 +36,7 @@ public class TicketManager {
         return result;
     }
 
-    public TicketOffer[] findAllSortTime(String to, String from, Comparator<TicketOffer> comparator) {
+    public TicketOffer[] findAllSortComparator(String to, String from, Comparator<TicketOffer> comparator) {
         TicketOffer[] result = new TicketOffer[0];
         for (TicketOffer ticket : repository.findAll()) {
             if (matches(ticket, to, from)) {

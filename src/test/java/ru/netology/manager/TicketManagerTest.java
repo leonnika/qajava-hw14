@@ -74,8 +74,8 @@ class TicketManagerTest {
 
     @Test
     void shouldfindAllSortPriceAndTime() {
-        TicketOffer[] actual = manager.findAllSortTime("KUF", "LEG",comparator);
-        TicketOffer[] expected = new TicketOffer[]{sixthTicket,fifthTicket,eleventhTicket,tenthTicket};
+        TicketOffer[] actual = manager.findAllSortComparator("KUF", "LEG", comparator);
+        TicketOffer[] expected = new TicketOffer[]{sixthTicket, fifthTicket, eleventhTicket, tenthTicket};
         assertArrayEquals(expected, actual);
     }
 }
