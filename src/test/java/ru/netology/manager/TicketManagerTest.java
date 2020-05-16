@@ -66,7 +66,7 @@ class TicketManagerTest {
 
     @Test
     void shouldfindAllSortAfteRemoveNoCorrect() {
-        manager.remById(100);
+        manager.remById(1000);
         TicketOffer[] actual = manager.findAllSort("LEG", "DME");
         TicketOffer[] expected = new TicketOffer[]{eighthTicket, fistTicket, thirdTicket};
         assertArrayEquals(expected, actual);
