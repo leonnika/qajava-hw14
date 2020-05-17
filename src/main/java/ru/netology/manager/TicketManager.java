@@ -12,7 +12,7 @@ public class TicketManager {
         this.repository = repository;
     }
 
-    public void remById(int id) {
+    public void deleteById(int id) {
         repository.removeById(id);
     }
 
@@ -36,10 +36,7 @@ public class TicketManager {
     }
 
     public boolean matches(TicketOffer ticket, String searchTo, String searchFrom) {
-        if ((ticket.getArrivalAirport().equalsIgnoreCase(searchTo)) && (ticket.getDepartureAirport().equalsIgnoreCase(searchFrom))) {
-            return true;
-        }
-        return false;
-    }
+        return  (ticket.getArrivalAirport().equalsIgnoreCase(searchTo)) && (ticket.getDepartureAirport().equalsIgnoreCase(searchFrom));
+               }
 
 }
