@@ -5,10 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master,comparator ]
+    branches: [ master,comparator]
   pull_request:
-    branches: [ master,comparator ]
-
+    branches: [ master,comparator]
 jobs:
   build:
 
