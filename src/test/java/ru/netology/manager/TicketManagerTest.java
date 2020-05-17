@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 class TicketManagerTest {
     TicketRepository repository = new TicketRepository();
     TicketManager manager = new TicketManager(repository);
-    private TicketOffer fistTicket = new TicketOffer(1, 10000, "LEG", "DME", 120);
+    private TicketOffer firstTicket = new TicketOffer(1, 10000, "LEG", "DME", 120);
     private TicketOffer secondTicket = new TicketOffer(2, 9000, "LEG", "KUF", 240);
     private TicketOffer thirdTicket = new TicketOffer(3, 11000, "LEG", "DME", 100);
     private TicketOffer fourthTicket = new TicketOffer(4, 10500, "DME", "LEG", 125);
@@ -24,7 +24,7 @@ class TicketManagerTest {
 
     @BeforeEach
     void init() {
-        manager.addTicket(fistTicket);
+        manager.addTicket(firstTicket);
         manager.addTicket(secondTicket);
         manager.addTicket(thirdTicket);
         manager.addTicket(fourthTicket);
@@ -40,7 +40,7 @@ class TicketManagerTest {
     @Test
     void shouldfindAllSort() {
         TicketOffer[] actual = manager.findAllSort("LEG", "DME");
-        TicketOffer[] expected = new TicketOffer[]{eighthTicket, fistTicket, thirdTicket};
+        TicketOffer[] expected = new TicketOffer[]{eighthTicket, firstTicket, thirdTicket};
         assertArrayEquals(expected, actual);
     }
 
@@ -53,7 +53,7 @@ class TicketManagerTest {
 
     @Test
     void shouldfindAllSortAfteRemove() {
-        manager.remById(1);
+        manager.deleteById(1);
         TicketOffer[] actual = manager.findAllSort("LEG", "DME");
         TicketOffer[] expected = new TicketOffer[]{eighthTicket, thirdTicket};
         assertArrayEquals(expected, actual);
@@ -61,9 +61,9 @@ class TicketManagerTest {
 
     @Test
     void shouldfindAllSortAfteRemoveNoCorrect() {
-        manager.remById(100);
+        manager.deleteById(100);
         TicketOffer[] actual = manager.findAllSort("LEG", "DME");
-        TicketOffer[] expected = new TicketOffer[]{eighthTicket, fistTicket, thirdTicket};
+        TicketOffer[] expected = new TicketOffer[]{eighthTicket, firstTicket, thirdTicket};
         assertArrayEquals(expected, actual);
     }
 }
