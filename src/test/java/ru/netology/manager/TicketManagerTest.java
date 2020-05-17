@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.TicketOffer;
 import ru.netology.repository.TicketRepository;
-import ru.netology.sorting.SortByPriceManager;
 import ru.netology.sorting.SortByTimeManager;
 
 import java.util.Comparator;
@@ -12,10 +11,10 @@ import java.util.Comparator;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class TicketManagerTest {
-    TicketRepository repository = new TicketRepository();
-    TicketManager manager = new TicketManager(repository);
-    Comparator<TicketOffer> comparator = new SortByPriceManager().thenComparing(new SortByTimeManager());
-    private TicketOffer fistTicket = new TicketOffer(1, 10000, "LEG", "DME", 120);
+    private TicketRepository repository = new TicketRepository();
+    private TicketManager manager = new TicketManager(repository);
+    private Comparator<TicketOffer> comparator = new SortByTimeManager();
+    private TicketOffer firstTicket = new TicketOffer(1, 10000, "LEG", "DME", 120);
     private TicketOffer secondTicket = new TicketOffer(2, 9000, "LEG", "KUF", 240);
     private TicketOffer thirdTicket = new TicketOffer(3, 11000, "LEG", "DME", 100);
     private TicketOffer fourthTicket = new TicketOffer(4, 10500, "DME", "LEG", 125);
@@ -29,7 +28,7 @@ class TicketManagerTest {
 
     @BeforeEach
     void init() {
-        manager.addTicket(fistTicket);
+        manager.addTicket(firstTicket);
         manager.addTicket(secondTicket);
         manager.addTicket(thirdTicket);
         manager.addTicket(fourthTicket);
@@ -43,32 +42,32 @@ class TicketManagerTest {
     }
 
     @Test
-    void shouldfindAllSort() {
+    void shouldFindAllSort() {
         TicketOffer[] actual = manager.findAllSort("LEG", "DME");
-        TicketOffer[] expected = new TicketOffer[]{eighthTicket, fistTicket, thirdTicket};
+        TicketOffer[] expected = new TicketOffer[]{eighthTicket, firstTicket, thirdTicket};
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldfindAllSortEmpty() {
+    void shouldFindAllSortEmpty() {
         TicketOffer[] actual = manager.findAllSort("LEG", "LEG");
         TicketOffer[] expected = new TicketOffer[0];
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldfindAllSortAfteRemove() {
-        manager.remById(1);
+    void shouldFindAllSortAfteRemove() {
+        manager.deleteById(1);
         TicketOffer[] actual = manager.findAllSort("LEG", "DME");
         TicketOffer[] expected = new TicketOffer[]{eighthTicket, thirdTicket};
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldfindAllSortAfteRemoveNoCorrect() {
-        manager.remById(1000);
+    void shouldFindAllSortAfteRemoveNoCorrect() {
+        manager.deleteById(1000);
         TicketOffer[] actual = manager.findAllSort("LEG", "DME");
-        TicketOffer[] expected = new TicketOffer[]{eighthTicket, fistTicket, thirdTicket};
+        TicketOffer[] expected = new TicketOffer[]{eighthTicket, firstTicket, thirdTicket};
         assertArrayEquals(expected, actual);
     }
 
