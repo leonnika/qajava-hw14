@@ -56,22 +56,6 @@ class TicketManagerTest {
     }
 
     @Test
-    void shouldFindAllSortAfteRemove() {
-        manager.deleteById(1);
-        TicketOffer[] actual = manager.findAllSort("LEG", "DME");
-        TicketOffer[] expected = new TicketOffer[]{eighthTicket, thirdTicket};
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldFindAllSortAfteRemoveNoCorrect() {
-        manager.deleteById(1000);
-        TicketOffer[] actual = manager.findAllSort("LEG", "DME");
-        TicketOffer[] expected = new TicketOffer[]{eighthTicket, firstTicket, thirdTicket};
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
     void shouldfindAllSortPriceAndTime() {
         TicketOffer[] actual = manager.findAllSortComparator("KUF", "LEG", comparator);
         TicketOffer[] expected = new TicketOffer[]{sixthTicket, fifthTicket, eleventhTicket, tenthTicket};
