@@ -1,15 +1,13 @@
-package ru.netology.manager;
+package ru.netology.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.TicketOffer;
-import ru.netology.repository.TicketRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class TicketManagerTest {
+class TicketRepositoryTest {
     private TicketRepository repository = new TicketRepository();
-    private TicketManager manager = new TicketManager(repository);
     private TicketOffer firstTicket = new TicketOffer(1, 10000, "LEG", "DME", 120);
     private TicketOffer secondTicket = new TicketOffer(2, 9000, "LEG", "KUF", 240);
     private TicketOffer thirdTicket = new TicketOffer(3, 11000, "LEG", "DME", 100);
@@ -24,30 +22,32 @@ class TicketManagerTest {
 
     @BeforeEach
     void init() {
-        manager.addTicket(firstTicket);
-        manager.addTicket(secondTicket);
-        manager.addTicket(thirdTicket);
-        manager.addTicket(fourthTicket);
-        manager.addTicket(fifthTicket);
-        manager.addTicket(sixthTicket);
-        manager.addTicket(seventhTicket);
-        manager.addTicket(eighthTicket);
-        manager.addTicket(ninthTicket);
-        manager.addTicket(tenthTicket);
-        manager.addTicket(eleventhTicket);
+        repository.save(firstTicket);
+        repository.save(secondTicket);
+        repository.save(thirdTicket);
+        repository.save(fourthTicket);
+        repository.save(fifthTicket);
+        repository.save(sixthTicket);
+        repository.save(seventhTicket);
+        repository.save(eighthTicket);
+        repository.save(ninthTicket);
+        repository.save(tenthTicket);
+        repository.save(eleventhTicket);
     }
 
     @Test
-    void shouldfindAllSort() {
-        TicketOffer[] actual = manager.findAllSort("LEG", "DME");
-        TicketOffer[] expected = new TicketOffer[]{eighthTicket, firstTicket, thirdTicket};
+    void ShouldRemoveByCorrectId() {
+        repository.removeById(1);
+        TicketOffer[] actual = repository.findAll();
+        TicketOffer[] expected = new TicketOffer[]{secondTicket, thirdTicket, fourthTicket, fifthTicket, sixthTicket, seventhTicket, eighthTicket, ninthTicket, tenthTicket, eleventhTicket};
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldfindAllSortEmpty() {
-        TicketOffer[] actual = manager.findAllSort("LEG", "LEG");
-        TicketOffer[] expected = new TicketOffer[0];
+    void ShouldRemoveByNotCorrectId() {
+        repository.removeById(100);
+        TicketOffer[] actual = repository.findAll();
+        TicketOffer[] expected = new TicketOffer[]{firstTicket, secondTicket, thirdTicket, fourthTicket, fifthTicket, sixthTicket, seventhTicket, eighthTicket, ninthTicket, tenthTicket, eleventhTicket};
         assertArrayEquals(expected, actual);
     }
 }
